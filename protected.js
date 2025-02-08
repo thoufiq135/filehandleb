@@ -27,7 +27,7 @@ Pro.get("/",(req,res)=>{
         res.status(200).json(matter)
     }
     }catch(e){
-        res.status(500).json({message:"No data found"})
+        res.status(500).json({message:"No data found",e})
     }
     
 })
