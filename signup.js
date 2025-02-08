@@ -2,6 +2,7 @@ const express=require("express")
 const signup=express.Router()
 const fs=require("fs")
 const model=require("./mongo.js")
+const path=require('path');
 signup.use(async(req,res,next)=>{
     const{Name,Email,Password}=req.body
     try{
@@ -20,7 +21,11 @@ signup.post("/",(req,res)=>{
     console.log(Name)
     console.log(Email)
     console.log(Password)
-    const filepath="./protected.json"
+    
+    
+const filepath = path.resolve(__dirname, "protected.json");
+
+
   
     try{
         model.insertMany({Name:Name,Email:Email,Password:Password})

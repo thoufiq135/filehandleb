@@ -2,6 +2,7 @@ const express=require("express")
 const Pro=express.Router()
 require("dotenv").config()
 const jwt=require("jsonwebtoken")
+const path=require('path');
 const fs=require("fs")
 Pro.use((req,res,next)=>{
     const token=req.headers.authorization.split(" ")[1]
@@ -22,7 +23,8 @@ Pro.use((req,res,next)=>{
 })
 Pro.get("/",(req,res)=>{
     try{
-        const matter=fs.readFileSync("./protected.json","utf-8")
+        const filepath = path.resolve(__dirname, "./protected.json");
+        const matter=fs.readFileSync(filepath,"utf-8")
     if(matter){
         res.status(200).json(matter)
     }
