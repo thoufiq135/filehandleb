@@ -4,26 +4,32 @@ require("dotenv").config()
 const jwt=require("jsonwebtoken")
 const path=require('path');
 const fs=require("fs")
+
 Pro.use((req,res,next)=>{
-    const token=req.headers.authorization.split(" ")[1]
-    if(token){
-        console.log("came token=",token)
-        try{
-            key=process.env.sercret_key
-            const data=jwt.verify(token,key)
-            if(!data){
-                res.status(401).json({message:"Invalid user"})
-            }else{
-                next()
-            }
-        }catch(e){console.log(e)}
-    }else{
-        console.log("Error")
+   
+        const token = req.cookies.token;
+        console.log("token=",token)
+        if(token){
+            console.log("came token=",token)
+            try{
+                key=process.env.sercret_key
+                const data=jwt.verify(token,key)
+                if(!data){
+                    res.status(401).json({message:"Invalid user"})
+                }else{
+                    next()
+                }
+            }catch(e){console.log(e)}
+        }else{
+            console.log("Error")
+        }
     }
-})
+
+   
+)
 Pro.get("/",(req,res)=>{
     try{
-        const filepath = path.resolve(__dirname, "./protected.json");
+        const filepath = path.resolve(__dirname, "protected.json");
         const matter=fs.readFileSync(filepath,"utf-8")
     if(matter){
         res.status(200).json(matter)

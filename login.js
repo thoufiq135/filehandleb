@@ -1,9 +1,9 @@
 const express=require("express")
 const login=express.Router()
+const cors=require("cors")
 require("dotenv").config()
 const model=require("./mongo.js")
 const jwt=require("jsonwebtoken")
-module.exports=login
 login.use(async (req,res,next)=>{
     const {Email,Password}=req.body
     try{
@@ -30,9 +30,10 @@ login.post("/",(req,res)=>{
     const key=process.env.sercret_key
     try{
         const token=jwt.sign(payload,key)
-        console.log(token)
-        res.status(200).json(token)
+        console.log("sending oken=",token)
+        res.cookie("token",token).status(200).json({Message:"Cookie is send!"})
     }catch(e){
         console.log("error at token",e)
     }
 })
+module.exports=login
