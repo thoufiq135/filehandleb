@@ -5,7 +5,7 @@ const model=require("./mongo.js")
 const cookieparser=require("cookie-parser")
 app.use(cookieparser())
 app.use(cors({
-    origin: "https://filehandlef.vercel.app/", 
+    origin: "https://filehandlef.vercel.app", 
     credentials: true,
 }));
 app.use(express.json())
