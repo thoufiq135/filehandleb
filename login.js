@@ -31,7 +31,7 @@ login.post("/",(req,res)=>{
     try{
         const token=jwt.sign(payload,key)
         console.log("sending oken=",token)
-        res.cookie("token",token,{httpOnly:true,secure:true,sameSite:"none",domain:"https://filehandlef.vercel.app"}).status(200).json({Message:"Cookie is send!"})
+        res.cookie("token",token,{httpOnly:true,secure:true,sameSite:"none"}).status(200).json({Message:"Cookie is send!"})
     }catch(e){
         console.log("error at token",e)
     }
