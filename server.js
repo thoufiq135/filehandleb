@@ -3,12 +3,13 @@ const app=express()
 const cors=require("cors")
 const model=require("./mongo.js")
 const cookieparser=require("cookie-parser")
+app.use(express.json())
 app.use(cookieparser())
 app.use(cors({
     origin: "https://filehandlef-final1.vercel.app", 
     credentials: true,
 }));
-app.use(express.json())
+
 const port=2000;
 const signup=require("./signup.js")
 const login = require("./login.js")
