@@ -18,7 +18,7 @@ app.use("/Signup",signup)
 app.use("/Login",login)
 app.use("/Protected",Pro)
 app.get("/",(req,res)=>{
-    res.cookie("message","Thisismyfirstcookie").send("<h1>Hello World</h1>")
+    res.cookie("message","Thisismyfirstcookie",{httpOnly:true,secure:true,sameSite:"none",domain:"https://filehandlef.vercel.app"}).send("<h1>Hello World</h1>")
    
     
 })
