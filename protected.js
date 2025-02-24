@@ -39,5 +39,16 @@ Pro.get("/",(req,res)=>{
     }
     
 })
+Pro.get("/fetchcookie",(req,res)=>{
+    try{
+        const token=req.cookies.token
+        console.log("retrived=",token)
+        if(token){
+            res.status(200).json({message:token})
+        }else{
+            res.status(400).json({message:"cookie not found!"})
+        }
+    }catch(e){console.log(e)}
+})
 const model=require("./mongo.js")
 module.exports=Pro
